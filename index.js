@@ -74,6 +74,15 @@ function doesStrikeCrit(attack, ac) {
  */
 function heal(maxHp, currentHp, healAmount) {
   // TODO
+  let newHP = currentHp + healAmount;
+
+  if (newHP > maxHp) {
+    newHP = maxHp;
+    return newHP;
+    //return maxHp
+  } else {
+    return newHP;
+  }
 }
 
 /**
@@ -94,6 +103,17 @@ function heal(maxHp, currentHp, healAmount) {
  */
 function getProficiencyBonus(level, rank) {
   // TODO
+  if (rank === "untrained") {
+    return 0;
+  } else if (rank === "trained") {
+    return level + 2;
+  } else if (rank === "expert") {
+    return level + 4;
+  } else if (rank === "master") {
+    return level + 6;
+  } else if (rank === "legendary") {
+    return level + 8;
+  }
 }
 
 /**
@@ -108,6 +128,13 @@ function getProficiencyBonus(level, rank) {
  */
 function getCoverBonus(behindObstacle, takingCover) {
   // TODO
+  if (takingCover) {
+    return 4;
+  } else if (behindObstacle) {
+    return 2;
+  } else {
+    return 0;
+  }
 }
 
 /**
@@ -124,6 +151,15 @@ function getCoverBonus(behindObstacle, takingCover) {
  */
 function getRemainingHp(maxHp, currentHp, damage) {
   // TODO
+  const newHP = currentHp - damage;
+
+  if (damage >= maxHp * 2) {
+    return -1;
+  } else if (newHP <= 0) {
+    return 0;
+  } else {
+    return newHP;
+  }
 }
 
 /**
@@ -136,6 +172,22 @@ function getRemainingHp(maxHp, currentHp, damage) {
  */
 function canSee(light, vision) {
   // TODO
+  if (light === "bright") {
+    return true;
+  } else if (light === "dim") {
+    if (vision === "low-light" || vision === "dark") {
+      return true;
+    } else {
+      return false;
+    }
+    //return vision === "lowlight" || vision === "dark"
+  } else if (light === "dark") {
+    if (vision === "dark") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 /**
@@ -150,4 +202,12 @@ function canSee(light, vision) {
  */
 function getStrikeDamage(attack, ac, damage) {
   // TODO
+  if (!doesStrikeHit(attack, ac)) {
+    return 0;
+  }
+  if (doesStrikeCrit(attack, ac)) {
+    return damage * 2;
+  } else {
+    return damage;
+  }
 }
