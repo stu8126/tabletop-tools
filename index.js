@@ -7,6 +7,13 @@
  */
 function canCastSpell(isSpellPrepared, hasScroll) {
   // TODO
+  if (isSpellPrepared === true) {
+    return true;
+  } else if (hasScroll === true) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 /**
